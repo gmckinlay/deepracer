@@ -1,7 +1,7 @@
 import math
 
 class Reward:
-    def __init__(self, verbose=False, track_time=False):
+    def __init__(self):
         self.prev_speed = 0
         self.prev_steering_angle = 0
         self.steering_alignement_weight = 2
@@ -38,14 +38,14 @@ class Reward:
         forward_point = waypoints[next_points[len(next_points)-1]]
 
         #Reward optimal steering
-        print("heading", heading)
-        print("next_points", next_points)
-        print("forward point", forward_point)
-        print("location", location)
+        # print("heading", heading)
+        # print("next_points", next_points)
+        # print("forward point", forward_point)
+        # print("location", location)
         optimal_heading = math.degrees(math.atan2(forward_point[1] - location[1], forward_point[0] - location[0]))
-        print("optimal heading", optimal_heading)
+        # print("optimal heading", optimal_heading)
         heading_diff = abs(optimal_heading - heading)
-        print("heading diff", optimal_heading)
+        # print("heading diff", optimal_heading)
         if heading_diff > 180:
             heading_diff = 360 - heading_diff
         # print("heading_diff", heading_diff)
@@ -74,7 +74,7 @@ class Reward:
         return max(math.exp(-0.5 * speed_diff), 0.01)
 
     def get_reward(self, steering_alignement_reward, steering_smoothness_reward, speed_reward):
-        return 1 + (steering_alignement_reward * self.steering_alignement_weight) # + (steering_smoothness_reward * self.steering_smoothness_weight) + (speed_reward * self.speed_weight)
+        return 1 + (steering_alignement_reward * self.steering_alignement_weight) + (steering_smoothness_reward * self.steering_smoothness_weight) + (speed_reward * self.speed_weight)
 
     def reward_fun(self, params):
         waypoints = params['waypoints']
