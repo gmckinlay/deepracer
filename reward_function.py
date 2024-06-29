@@ -73,7 +73,7 @@ class Reward:
         optimal_speed = max_speed - (curvature / 180) * (max_speed - min_speed)
         
         speed_diff = abs(speed - optimal_speed)
-        result = self.logarithmic_decreasing_function(speed_diff, 3)
+        result = self.logarithmic_decreasing_function(speed_diff, max_speed-min_speed)
         return result
     
     def get_center_line_reward(self, track_width, distance_from_center):
