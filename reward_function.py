@@ -118,10 +118,10 @@ class Reward:
             speed_reward = self.get_speed_reward(speed, waypoints, next_points_speed, waypoints[closest_waypoints[0]])
 
             initial_reward = (progress / 100)  # Adjusted scaling factor
-            reward += initial_reward * center_line_reward
-            reward += initial_reward * steering_alignment_reward
-            reward += initial_reward * steering_smoothness_reward
-            reward += initial_reward * speed_reward
+            reward += initial_reward * 1.5 * center_line_reward
+            reward += initial_reward * 1.0 * steering_alignment_reward
+            reward += initial_reward * 0.5 * steering_smoothness_reward
+            reward += initial_reward * 1.0 * speed_reward
 
             self.print("reward", reward)
         return float(reward)
