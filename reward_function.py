@@ -1,7 +1,7 @@
 import math
 
 class Reward:
-    def __init__(self, verbose=False, look_ahead_alignment=5, look_ahead_speed=10):
+    def __init__(self, verbose=False, look_ahead_alignment=6, look_ahead_speed=10):
         self.verbose = verbose
         self.prev_speed = 0
         self.prev_steering_angle = 0
@@ -65,7 +65,7 @@ class Reward:
         return result
 
     def get_speed_reward(self, speed, waypoints, next_points, initial_point):
-        next_point = waypoints[next_points[0]]
+        next_point = waypoints[next_points[len(next_points) // 2]]
         forward_point = waypoints[next_points[-1]]
         curvature = self.angle_between_points(initial_point, next_point, forward_point)
 
